@@ -19,12 +19,12 @@ const Navbar = () => {
           <Dices size={28} />
         </Link>
         <div className='hidden md:flex justify-between items-center space-x-4 md:mr-16'>
-          {navbarItems.map((item) => (
+          {navbarItems.map((item,index) => (
             <Link
-              key={item.href}
-              href={item.href}
-              className={cn('text-gray-200 font-semibold hover:bg-accent px-3 py-1.5 rounded-md hover:text-blue-400 transition', (pathName === item.href) ? 'bg-accent text-blue-400' : '')}>
-              {item.title}
+              key={index}
+              href={item?.href || '/'}
+              className={cn('text-gray-200 font-semibold hover:bg-accent px-3 py-1.5 rounded-md hover:text-blue-400 transition', (pathName === item?.href) ? 'bg-accent text-blue-400' : '')}>
+              {item?.title}
             </Link>
           ))}
         </div>
@@ -33,13 +33,13 @@ const Navbar = () => {
         </button>
       </div>
       <div className={cn('flex flex-col md:hidden shadow-lg shadow-gray-400/15')}>
-        {(open) && navbarItems.map((item) => (
+        {(open) && navbarItems.map((item,index) => (
           <Link
-            key={item.href}
-            href={item.href}
-            className={cn('text-gray-200 font-semibold px-10 py-3 rounded-md hover:text-blue-400 transition', (pathName === item.href) ? 'text-blue-400' : '')}
+            key={index}
+            href={item?.href || '/'}
+            className={cn('text-gray-200 font-semibold px-10 py-3 rounded-md hover:text-blue-400 transition', (pathName === item?.href) ? 'text-blue-400' : '')}
             onClick={() => setOpen(false)}>
-            {item.title}
+            {item?.title}
           </Link>
         ))}
       </div>
