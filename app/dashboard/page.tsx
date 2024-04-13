@@ -1,4 +1,5 @@
 "use client"
+import Loader from "@/components/Loader";
 import Popup from "@/components/Popup";
 import { Upload } from "lucide-react";
 import { useState } from "react";
@@ -7,10 +8,13 @@ export default function Home() {
   const [fileUrl, setFileUrl] = useState<string>("")
   const [fileId, setFileId] = useState<string>("")
   const [isModalOpen, setPopupOpen] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState(false);
 
   const handleUpload = async (event: any) => {
     event.preventDefault()
     if (file) {
+      setUploadStatus(true)
+      setFileUrl("")
       try {
         const { url } = await fetch("/api/uploadurl").then(res => res.json())
         const res = await fetch(url, {
@@ -22,6 +26,7 @@ export default function Home() {
         })
         setFileUrl(url.split('?')[0])
         setFileId(url.split('?')[0].split('/').pop())
+        setUploadStatus(false)
         setPopupOpen(true)
       } catch (error) {
         console.error("Error uploading file:", error)
@@ -39,7 +44,7 @@ export default function Home() {
   }
 
   return (
-    <div className="flex justify-center flex-col items-center pt-10">
+    <div className="flex flex-col justify-center items-center gap-8 flex-wrap py-10">
       <div>
         {/* <p className='mb-5 text-yellow-300'>*AWS will not work due to security reasons.*</p> */}
         <div className="flex flex-col justify-center items-center">
@@ -54,8 +59,11 @@ export default function Home() {
           </div>
           <button type="submit" className="bg-white text-black font-semibold py-2 w-full rounded-lg hover:bg-gray-200 transition duration-300">Upload</button>
         </form>
-        <img src={fileUrl} alt="" />
       </div>
+        <div className={`p-2 rounded-lg flex justify-center items-center`}>
+          {uploadStatus && <Loader />}
+          {fileId ? <img src={fileUrl} alt="" /> : <div className='text-red-400 font-semibold'>* Upload a file</div>}
+        </div>
       <Popup subHeading={fileId} buttonText="Cancel" isOpen={isModalOpen} onClose={() => setPopupOpen(false)} />
     </div>
   );
