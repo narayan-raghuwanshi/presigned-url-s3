@@ -60,10 +60,10 @@ export default function Home() {
           <button type="submit" className="bg-white text-black font-semibold py-2 w-full rounded-lg hover:bg-gray-200 transition duration-300">Upload</button>
         </form>
       </div>
-        <div className={`p-2 rounded-lg flex justify-center items-center`}>
-          {uploadStatus && <Loader />}
-          {fileId ? <img src={fileUrl} alt="" /> : <div className='text-red-400 font-semibold'>* Upload a file</div>}
-        </div>
+      <div className={`p-2 rounded-lg flex justify-center items-center`}>
+        {uploadStatus && <Loader />}
+        {fileId && <img src={fileUrl} alt="" />}
+      </div>
       <Popup subHeading={fileId} buttonText="Cancel" isOpen={isModalOpen} onClose={() => setPopupOpen(false)} />
     </div>
   );

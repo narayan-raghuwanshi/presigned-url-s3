@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 
 const Collection = () => {
     const [fileId, setFileId] = useState<string>("");
-    const [validId,setValidId] = useState<boolean>(true)
+    const [validId, setValidId] = useState<boolean>(true)
     const [fileUrl, setFileUrl] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -24,9 +24,9 @@ const Collection = () => {
                     body: JSON.stringify({ fileId })
                 }).then(res => res.json())
                 const res = await fetch(url)
-                if(res.status===200){
+                if (res.status === 200) {
                     setFileUrl(url.split('?')[0])
-                }else{
+                } else {
                     setValidId(false)
                 }
                 setLoading(false)
@@ -56,8 +56,8 @@ const Collection = () => {
                 </form>
             </div>
             <div className={`p-2 rounded-lg flex justify-center items-center`}>
-                {loading && <Loader/>}
-                {validId? <img src={fileUrl} alt="" />:<div className='text-red-400 font-semibold'>* Enter valid ID</div>}
+                {loading && <Loader />}
+                {validId ? <img src={fileUrl} alt="" /> : <div className='text-red-400 font-semibold'>* Enter valid ID</div>}
             </div>
         </div>
     )
