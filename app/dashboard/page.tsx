@@ -46,7 +46,7 @@ export default function Home() {
   return (
     <div className="flex flex-col justify-center items-center gap-8 flex-wrap py-10">
       <div>
-        {/* <p className='mb-5 text-yellow-300'>*AWS will not work due to security reasons.*</p> */}
+        <p className='mb-5 text-yellow-300'>*AWS will not work due to security reasons.*</p>
         <div className="flex flex-col justify-center items-center">
           <div className="text-center space-y-2 max-w-xs">
             <h3 className="text-3xl md:text-5xl font-semibold text-blue-400 flex justify-center items-center gap-3"><Upload size={38} /> Upload file</h3>
